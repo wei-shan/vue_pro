@@ -57,7 +57,7 @@ module.exports = {
 							limit: 10240  // 如果文件小于10kb，那么打包到js中，否则还是url形式引入
 						}
 					},
-					'image-webpack-loader'
+					// 'image-webpack-loader'
 				]
 			},
 			// 配置解析es6为es5
