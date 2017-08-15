@@ -1,10 +1,10 @@
 <template>
     <footer class="footer">
         <nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="#tabbar">
+			<router-link class="mui-tab-item mui-active" to="/">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
-			</a>
+			</router-link>
 			<a class="mui-tab-item" href="#tabbar-with-chat">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">会员</span>
