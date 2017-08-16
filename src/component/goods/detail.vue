@@ -13,21 +13,13 @@
           <span>销售价: </span>
           <em>￥{{info_list.sell_price}}</em>
         </div>
-        <div>
-          <span>购买数量：</span>
-          <!--数字输入框 -->
-          <div class="mui-numbox">
-            <button class="mui-btn mui-btn-numbox-minus">-</button>
-            <input class="mui-input-numbox" type="number" v-model="count">
-            <button class="mui-btn mui-btn-numbox-plus">+</button>
-          </div>
-        </div>
+        <v-numbar :count="count" @change="changeNum"></v-numbar>
       </div>
       <!-- 按钮 -->
       <div class="mui-card-footer">
         <button type="button" class="mui-btn mui-btn-success mui-btn-block mui-btn-outlined">结算</button>
         <div></div>
-        <button type="button" class="mui-btn mui-btn-success mui-btn-block mui-btn-outlined">加入购物车</button>
+        <button type="button" class="mui-btn mui-btn-success mui-btn-block mui-btn-outlined" @click="addshopCar">加入购物车</button>
       </div>
     </div>
   
@@ -54,10 +46,13 @@
 
 <script>
 import Ctitle from '../common/title.vue';
-import config from '../../js/config.js';
 import Cswipe from '../common/swipe.vue';
 import Ccomment from '../common/comment.vue';
 import Cintro from './son/intro.vue';
+import Cnumbar from '../common/numbar.vue';
+
+import config from '../../js/config.js';
+import goods from '../../js/model/goods.js'
 export default {
   data() {
     return {
@@ -65,7 +60,7 @@ export default {
       list: [],
       id:this.$route.params.id,
       info_list:{},
-      count:0,
+      count:goods.get(this.$route.params.id),
       selected:''
     }
   },
@@ -73,7 +68,8 @@ export default {
     'v-title': Ctitle,
     'v-swipe': Cswipe,
     'v-comment':Ccomment,
-    'v-intro':Cintro
+    'v-intro':Cintro,
+    'v-numbar':Cnumbar
   },
   methods: {
     gethumimages() {
@@ -93,6 +89,14 @@ export default {
         let body =resp.body.message;
         this.info_list = body[0];
       })
+    },
+    changeNum(v){
+      this.count=v;
+    },
+    addshopCar(){
+
+      goods.set(this.id,this.count);
+      document.querySelector('.shopCar').innerHTML=goods.get();
     }
   },
   created(){
