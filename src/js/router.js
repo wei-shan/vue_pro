@@ -14,7 +14,7 @@ export default new VueRouter({
         {path:'/news/detail/:newid',component:Cnewsdetail},
         {path:'/photo/list/:cateid',component:Cphotolist},
         {path:'/photo/detail/:imgid',component:Cphotodetail},
-        {path:'/goods/list',component:Cgoodslist},
+        {path:'/goods/list/:pageIndex',component:Cgoodslist},
         {path:'/goods/detail',component:Cgoodsdetail}
     ]
 })

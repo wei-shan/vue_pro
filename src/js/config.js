@@ -13,7 +13,10 @@ export default {
     getphotocategory: url + '/api/getimgcategory',
 
     getphotodetail: url + '/api/getimageInfo/',
-    gethumimages: url + '/api/getthumimages/'
+    gethumimages: url + '/api/getthumimages/',
+
+    // 商品
+    getgoodslist:url+'/api/getgoods?pageindex='
 
 
 }

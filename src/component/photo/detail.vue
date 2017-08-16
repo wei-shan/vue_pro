@@ -11,8 +11,8 @@
             </p>
             <div class="mui-card-content">
                 <ul class="mui-table-view mui-grid-view">
-                    <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="(item,i) in img_list" :key="i">
-                        <img class="mui-media-object"  :src="'http://ofv795nmp.bkt.clouddn.com/' + item.src">
+                    <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="(item,index) in img_list" :key="index">
+                        <img class="mui-media-object preview-img" @click="$preview.open(index, img_list)" :src="item.src">
                     </li>
                 </ul>
             </div>
@@ -50,7 +50,14 @@ export default {
         gethumimages() {
             let url = config.gethumimages + this.$route.params.imgid;
             this.$http.get(url).then(resp => {
-                resp.body.status == 0 && (this.img_list = resp.body.message);
+                if(resp.body.status == 0){
+                    this.img_list =resp.body.message.map(function(val){
+                        val.src='http://ofv795nmp.bkt.clouddn.com/'+val.src
+                        val.w=300;
+                        val.h=200;
+                        return val;
+                    }) 
+                }
             })
         }
     },

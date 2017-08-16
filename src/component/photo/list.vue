@@ -28,6 +28,7 @@
 <script>
 import Ctitle from '../common/title.vue';
 import config from '../../js/config.js';
+import IScroll from '../../lib/iscroll.js';
 export default {
     data() {
         return {
@@ -47,7 +48,14 @@ export default {
         getphotocategory() {
             let url = config.getphotocategory;
             this.$http.get(url).then(resp => {
-                resp.body.status == 0 && (this.imglist.push(...resp.body.message))
+                if (resp.body.status == 0) {
+                    this.imglist.push(...resp.body.message);
+                    var myScroll = new IScroll('.tab',{
+                        scrollX:true,
+                        scrollY:false
+                    });
+
+                }
             })
         },
         getphotolist() {
@@ -63,10 +71,10 @@ export default {
         this.getphotocategory(this.$route.params.cateid);
         this.getphotolist();
     },
-    watch:{
-        $route(){
+    watch: {
+        $route() {
             // console.log(this.$route.params.cateid);
-            
+
             this.getphotolist(this.$route.params.cateid);
         }
     }
@@ -76,18 +84,15 @@ export default {
 .photoList {
     .tab {
         width: 100%;
-        overflow: scroll; 
-        // scrollbar-face-color:aliceblue;
-        // &::-webkit-scrollbar-thumb {
-        //     background-color: #f00;
-        // }
+        overflow: hidden;
+        // height: 44px;
         .tab_cate {
-            width: 242%;
+            width: 241%;
             li {
                 background-color: #fff;
-                float:left;
+                float: left;
                 padding: 11px 10px;
-                color:aqua;
+                color: aqua;
             }
         }
     }
@@ -97,16 +102,15 @@ export default {
         }
         .info {
             position: absolute;
-            bottom:10px;
-            width: 100%;
-            // overflow: hidden;
+            bottom: 10px;
+            width: 100%; // overflow: hidden;
             h4 {
-                color:#fff;
+                color: #fff;
             }
-            p{
+            p {
                 height: 40px;
-                color:#fff;
-                word-break:break-word;
+                color: #fff;
+                word-break: break-word;
             }
         }
     }
