@@ -14,7 +14,7 @@
         <ul class="mui-table-view photo_list">
             <li class="mui-table-view-cell mui-media" v-for="k in photolist" :key="k.id">
                 <router-link :to="'/photo/detail/'+k.id">
-                    <img :src="'http://ofv795nmp.bkt.clouddn.com/' + k.img_url"></img>
+                    <img v-lazy="'http://ofv795nmp.bkt.clouddn.com/' + k.img_url" :src="'http://ofv795nmp.bkt.clouddn.com/' + k.img_url"></img>
                     <div class="info">
                         <h4>{{k.title}}</h4>
                         <p>{{k.zhaiyao}}</p>
@@ -50,9 +50,9 @@ export default {
             this.$http.get(url).then(resp => {
                 if (resp.body.status == 0) {
                     this.imglist.push(...resp.body.message);
-                    var myScroll = new IScroll('.tab',{
-                        scrollX:true,
-                        scrollY:false
+                    var myScroll = new IScroll('.tab', {
+                        scrollX: true,
+                        scrollY: false
                     });
 
                 }
@@ -84,8 +84,7 @@ export default {
 .photoList {
     .tab {
         width: 100%;
-        overflow: hidden;
-        // height: 44px;
+        overflow: hidden; // height: 44px;
         .tab_cate {
             width: 241%;
             li {
@@ -99,6 +98,11 @@ export default {
     .photo_list {
         img {
             width: 100%;
+            &[lazy=loading] {
+                width: 40px;
+                height: 300px;
+                margin: auto;
+            }
         }
         .info {
             position: absolute;
