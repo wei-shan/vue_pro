@@ -3,7 +3,7 @@
         <v-title :title='title'></v-title>
         <ul class="mui-table-view mui-grid-view">
             <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for='item in list' :key='item.id'>
-                <router-link :to="'/goods/detail/'+item.id ">
+                <router-link :to="{name:'GoodsD',params:{id:item.id}}">
                     <img class="mui-media-object" :src="item.img_url">
                     <div class="mui-media-body goods_body">
                         <h5>{{item.title}}</h5>
@@ -54,16 +54,23 @@ export default {
             
             let url = config.getgoodslist + pageindex;
             this.$http.get(url).then(resp => {  
-                resp.body.status == 0 && (this.list = resp.body.message);
+
+                if(resp.body.status == 0){
+                    this.list = resp.body.message;
+                    
+                }
+                // if(pageindex<1){
+                //     this.$refs.uppage.disabled="disabled";
+                // }
+                // if(this.list.length<10){
+                //     this.$refs.downpage.disabled="disabled";
+                // }
             })
         },
-        getpageIndex(){
-            // this.pageIndex=this.pageIndex||0
-        }
+
 
     },
     created() {
-        this.getpageIndex()
         this.getgoodslist(this.pageIndex);
         
     },

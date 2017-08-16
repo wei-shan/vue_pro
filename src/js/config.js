@@ -16,7 +16,9 @@ export default {
     gethumimages: url + '/api/getthumimages/',
 
     // 商品
-    getgoodslist:url+'/api/getgoods?pageindex='
+    getgoodslist:url+'/api/getgoods?pageindex=',
+    getgoodsinfo:url+'/api/goods/getinfo/',
+    getintro:url+'/api/goods/getdesc/'
 
 
 }

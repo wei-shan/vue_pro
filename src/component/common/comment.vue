@@ -62,7 +62,6 @@ export default {
                 if (resp.body.status == 0 && (resp.body.message.length > 1)) {
                     this.list=this.list.concat(resp.body.message);
                     this.pageindex++;
-                    console.log(this.list)
                 }else if(resp.body.message.length==0){
                     this.$refs.loadMore.disabled="disabled";
                 }

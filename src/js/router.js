@@ -15,6 +15,7 @@ export default new VueRouter({
         {path:'/photo/list/:cateid',component:Cphotolist},
         {path:'/photo/detail/:imgid',component:Cphotodetail},
         {path:'/goods/list/:pageIndex',component:Cgoodslist},
-        {path:'/goods/detail',component:Cgoodsdetail}
+        {path:'/goods/detail/:id',component:Cgoodsdetail ,name:'GoodsD'},
+        // {path:''}
     ]
 })
