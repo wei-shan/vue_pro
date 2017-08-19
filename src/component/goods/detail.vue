@@ -13,7 +13,10 @@
           <span>销售价: </span>
           <em>￥{{info_list.sell_price}}</em>
         </div>
-        <v-numbar :count="count" @change="changeNum"></v-numbar>
+        <div>
+          <span>购买数量：</span>
+          <v-numbar :count="count" @change="changeNum"></v-numbar>
+        </div>
       </div>
       <!-- 按钮 -->
       <div class="mui-card-footer">
@@ -58,18 +61,18 @@ export default {
     return {
       title: '商品详情',
       list: [],
-      id:this.$route.params.id,
-      info_list:{},
-      count:goods.get(this.$route.params.id),
-      selected:''
+      id: this.$route.params.id,
+      info_list: {},
+      count: goods.get(this.$route.params.id),
+      selected: ''
     }
   },
   components: {
     'v-title': Ctitle,
     'v-swipe': Cswipe,
-    'v-comment':Ccomment,
-    'v-intro':Cintro,
-    'v-numbar':Cnumbar
+    'v-comment': Ccomment,
+    'v-intro': Cintro,
+    'v-numbar': Cnumbar
   },
   methods: {
     gethumimages() {
@@ -77,29 +80,29 @@ export default {
       this.$http.get(url).then(resp => {
         if (resp.body.status == 0) {
           this.list = resp.body.message.map(function (val) {
-            val.img = 'http://ofv795nmp.bkt.clouddn.com/' + val.src
+            val.img = config.img_url + val.src
             return val;
           })
         }
       })
     },
-    getInfo(){
-      let url =config.getgoodsinfo+this.id;
-      this.$http.get(url).then(resp=>{
-        let body =resp.body.message;
+    getInfo() {
+      let url = config.getgoodsinfo + this.id;
+      this.$http.get(url).then(resp => {
+        let body = resp.body.message;
         this.info_list = body[0];
       })
     },
-    changeNum(v){
-      this.count=v;
+    changeNum(v) {
+      this.count = v;
     },
-    addshopCar(){
-
-      goods.set(this.id,this.count);
-      document.querySelector('.shopCar').innerHTML=goods.get();
+    addshopCar() {
+      goods.set(this.id, this.count);
+      document.querySelector('.shopCar').innerHTML = goods.get();
     }
   },
-  created(){
+  created() {
+    // console.log(this.id)
     this.gethumimages();
     this.getInfo();
   }
